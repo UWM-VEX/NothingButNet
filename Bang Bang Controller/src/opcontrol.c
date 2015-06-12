@@ -53,6 +53,10 @@
  */
 void operatorControl() {
 
+	BangBangController myController = initBangBangController(127, 50, 1200.0);
+
+	motorSet(1, runBangBangController(myController, 2));
+
 	while (1) {
 		delay(20);
 	}
