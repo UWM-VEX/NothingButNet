@@ -45,6 +45,12 @@
 
 #include <API.h>
 #include "BangBangController.h"
+#include "PantherMotor.h"
+#include "IME.h"
+
+BangBangController myController;
+PantherMotor motor;
+IME ime;
 
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus

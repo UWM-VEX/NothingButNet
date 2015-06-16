@@ -29,5 +29,7 @@ int getIMEVelocity(IME ime)
 
 	imeGetVelocity(ime.port, &value);
 
+	printf("PV: %d\n", value);
+
 	return (ime.inverted) ? -value : value;
 }

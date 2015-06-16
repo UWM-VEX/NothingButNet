@@ -53,11 +53,12 @@
  */
 void operatorControl() {
 
-	BangBangController myController = initBangBangController(127, 50, 1200.0);
+	while (1)
+	{
+		int speed = runBangBangController(myController, getIMEVelocity(ime));
+		setPantherMotor(motor, speed);
 
-	motorSet(1, runBangBangController(myController, 2));
-
-	while (1) {
+		printf("Motor Speed: %d\n", speed);
 		delay(20);
 	}
 }
