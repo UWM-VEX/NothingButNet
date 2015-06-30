@@ -44,6 +44,10 @@
 #define MAIN_H_
 
 #include <API.h>
+#include "BangBangController.h"
+#include "PantherMotor.h"
+#include "SingleFlyWheelShooter.h"
+#include "Utilities.h"
 
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus
