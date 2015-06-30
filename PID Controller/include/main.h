@@ -47,6 +47,7 @@
 #include "IME.h"
 #include "PantherMotor.h"
 #include "PIDController.h"
+#include "Utilities.h"
 
 PIDController myController;
 PantherMotor motor;

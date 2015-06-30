@@ -55,6 +55,9 @@ void operatorControl() {
 
 	while (1) {
 		int speed = runPIDController(&myController, getIMEVelocity(ime));
+		printf("Motor Speed: %d\n", speed);
+		speed = limit(speed, 127, -127);
+		setPantherMotor(motor, speed);
 		delay(20);
 	}
 }

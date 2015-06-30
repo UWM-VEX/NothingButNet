@@ -61,7 +61,7 @@ void initializeIO() {
 void initialize()
 {
 	imeInitializeAll();
-	myController = initPIDController(0,0,0,.02,4000,20);
+	myController = initPIDController(0.05,0.000002,0.01,0.015,4000,40);
 	ime = initIME(0,0);
 	motor = initPantherMotor(2,0);
 }

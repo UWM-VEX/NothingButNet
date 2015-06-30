@@ -46,30 +46,33 @@ void setErrorEpsilon(PIDController *controller, double errorEpsilon)
 
 int getPContribution(PIDController *controller, int processVariable)
 {
-	return (int) ((*controller).kP * (processVariable - (*controller).setPoint));
+	return (int) ((*controller).kP * ((*controller).setPoint - processVariable));
 }
 
 int getIContribution(PIDController *controller, int processVariable)
 {
-	int error = processVariable - (*controller).setPoint;
+	int error = (*controller).setPoint - processVariable;
 
 	if(abs(error) < (*controller).errorEpsilon)
 	{
 		(*controller).sumOfError = 0;
+		puts("Error cleared.");
 		return 0;
 	}
 	else
 	{
+		puts("Error accumulated.");
 		long timeDiff = millis() - (*controller).lastTime;
 		int newError = (int) timeDiff * error;
 		(*controller).sumOfError += newError;
+		printf("Sum of Error: %d\n", (*controller).sumOfError);
 		return (int) (*controller).sumOfError * (*controller).kI;
 	}
 }
 
 int getDContribution(PIDController *controller, int processVariable)
 {
-	int error = processVariable - (*controller).setPoint;
+	int error = (*controller).setPoint - processVariable;
 	int timeDiff = (int) (millis() - (*controller).lastTime);
 	int errorDiff = error - (*controller).lastError;
 
@@ -88,10 +91,14 @@ int runPIDController(PIDController *controller, int processVariable)
 	int pContribution = getPContribution(controller, processVariable);
 	int iContribution = getIContribution(controller, processVariable);
 	int dContribution = getDContribution(controller, processVariable);
-	int fContribution = getFContribution(controller, processVariable);
+	int fContribution = getFContribution(controller);
 
-	(*controller).lastError = processVariable - (*controller).setPoint;
+	(*controller).lastError = (*controller).setPoint - processVariable;
 	(*controller).lastTime = millis();
+
+	printf("PV: %d\n", processVariable);
+	printf("SP: %d\n", (*controller).setPoint);
+	printf("I: %d\n", iContribution);
 
 	return pContribution + iContribution + dContribution + fContribution;
 }
