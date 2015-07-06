@@ -19,5 +19,6 @@ struct BangBangController{
 BangBangController initBangBangController(int onSpeed, int offSpeed, double setPoint);
 void changeSetPoint(BangBangController controller, double setPoint);
 int runBangBangController(BangBangController controller, double processVariable);
+int getError(BangBangController controller, int processVariable);
 
 #endif /* BANGBANGCONTROLLER_H_ */
