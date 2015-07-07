@@ -23,3 +23,8 @@ int runBangBangController(BangBangController controller, double processVariable)
 	return ((processVariable < controller.setPoint) ?
 			controller.onSpeed : controller.offSpeed);
 }
+
+int getError(BangBangController controller, int processVariable)
+{
+	return controller.setPoint - processVariable;
+}

@@ -53,7 +53,9 @@
  */
 void operatorControl() {
 
-	while (1) {
+	while (1)
+	{
+
 		delay(20);
 	}
 }
