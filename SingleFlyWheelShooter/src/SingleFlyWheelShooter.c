@@ -7,17 +7,17 @@
 
 #include "main.h"
 
-SingleFlyWheelShooter initSingleFlyWheelShooter(int onSpeed, int offSpeed, int motor, int motorInverted, int topEncoder, int bottomEncoder, int encoderInverted)
+SingleFlyWheelShooter initSingleFlyWheelShooter(int onSpeed, int offSpeed, int motor, int motorInverted, int ime, int imeInverted)
 {
 	SingleFlyWheelShooter newShooter;
 
 	BangBangController newController = {onSpeed, offSpeed, 0};
 	PantherMotor newMotor = {motor, motorInverted};
-	Encoder newEncoder = encoderInit(topEncoder, bottomEncoder, encoderInverted);
+	IME newIME = initIME(ime, imeInverted);
 
 	newShooter.controller = &newController;
 	newShooter.motor = newMotor;
-	newShooter.encoder = newEncoder;
+	newShooter.ime = newIME;
 	newShooter.on = 0;
 	newShooter.lastOffTime = millis();
 	newShooter.processVariable = 0;
@@ -42,7 +42,7 @@ void setOffSpeed(SingleFlyWheelShooter *shooter, int offSpeed)
 
 void updateShooter(SingleFlyWheelShooter *shooter)
 {
-	(*shooter).processVariable =
+	(*shooter).processVariable = getIMEVelocity((*shooter).ime);
 
 	if((*(*shooter).controller).setPoint - (*shooter).processVariable)
 	{

@@ -12,7 +12,7 @@ struct SingleFlyWheelShooter{
 
 	BangBangController *controller;
 	PantherMotor motor;
-	Encoder encoder;
+	IME ime;
 	int on;
 	long lastOffTime;
 	int processVariable;
