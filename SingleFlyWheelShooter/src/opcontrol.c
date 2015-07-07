@@ -51,10 +51,23 @@
  *
  * This task should never exit; it should end with some kind of infinite loop, even if empty.
  */
+
 void operatorControl() {
 
 	while (1)
 	{
+		setSetPoint(&shooter, 4000);
+		updateShooter(&shooter);
+		runShooter(&shooter);
+
+		if(isShooterUpToSpeed(&shooter))
+		{
+			lcdSetText(uart1, 1, "YES :)");
+		}
+		else
+		{
+			lcdSetText(uart1, 2, "NO  :(");
+		}
 
 		delay(20);
 	}

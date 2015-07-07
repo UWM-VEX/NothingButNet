@@ -19,9 +19,13 @@ struct SingleFlyWheelShooter{
 
 }typedef SingleFlyWheelShooter;
 
-SingleFlyWheelShooter initSingleFlyWheelShooter(int onSpeed, int offSpeed, int motor, int motorInverted, int topEncoder, int bottomEncoder, int encoderInverted);
-void updateShooter(SingleFlyWheelShooter *shooter, int processVariable);
+SingleFlyWheelShooter initSingleFlyWheelShooter(int onSpeed, int offSpeed, int motor, int motorInverted, int ime, int imeInverted);
+void updateShooter(SingleFlyWheelShooter *shooter);
 int isShooterUpToSpeed(SingleFlyWheelShooter *shooter);
+void setSetPoint(SingleFlyWheelShooter *shooter, int setPoint);
+void setOnSpeed(SingleFlyWheelShooter *shooter, int onSpeed);
+void setOffSpeed(SingleFlyWheelShooter *shooter, int offSpeed);
+void runShooter(SingleFlyWheelShooter *shooter);
 
 SingleFlyWheelShooter shooter;
 

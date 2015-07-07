@@ -44,7 +44,7 @@ void updateShooter(SingleFlyWheelShooter *shooter)
 {
 	(*shooter).processVariable = getIMEVelocity((*shooter).ime);
 
-	if((*(*shooter).controller).setPoint - (*shooter).processVariable)
+	if(abs((*(*shooter).controller).setPoint - (*shooter).processVariable) > 100)
 	{
 		(*shooter).lastOffTime = millis();
 	}
