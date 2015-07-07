@@ -15,7 +15,7 @@ struct SingleFlyWheelShooter{
 	IME ime;
 	int on;
 	long lastOffTime;
-	int processVariable;
+	double processVariable;
 
 }typedef SingleFlyWheelShooter;
 

@@ -20,6 +20,8 @@ void changeSetPoint(BangBangController controller, double setPoint)
 
 int runBangBangController(BangBangController controller, double processVariable)
 {
+	printf("SP: %f\n", controller.setPoint);
+
 	return ((processVariable < controller.setPoint) ?
 			controller.onSpeed : controller.offSpeed);
 }

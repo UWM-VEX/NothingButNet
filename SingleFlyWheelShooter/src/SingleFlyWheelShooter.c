@@ -27,7 +27,7 @@ SingleFlyWheelShooter initSingleFlyWheelShooter(int onSpeed, int offSpeed, int m
 
 void setSetPoint(SingleFlyWheelShooter *shooter, int setPoint)
 {
-	(*(*shooter).controller).setPoint = setPoint;
+	(*(*shooter).controller).setPoint = (double) setPoint;
 }
 
 void setOnSpeed(SingleFlyWheelShooter *shooter, int onSpeed)
@@ -44,7 +44,11 @@ void updateShooter(SingleFlyWheelShooter *shooter)
 {
 	(*shooter).processVariable = getIMEVelocity((*shooter).ime);
 
-	if(abs((*(*shooter).controller).setPoint - (*shooter).processVariable) > 100)
+	printf("Speed: %f\n", (*shooter).processVariable);
+
+	printf("Error: %f\n", (*(*shooter).controller).setPoint - (*shooter).processVariable);
+
+	if(abs((int) (*(*shooter).controller).setPoint - (*shooter).processVariable) > 250)
 	{
 		(*shooter).lastOffTime = millis();
 	}
@@ -52,7 +56,7 @@ void updateShooter(SingleFlyWheelShooter *shooter)
 
 int isShooterUpToSpeed(SingleFlyWheelShooter *shooter)
 {
-	return (((millis - (*shooter).lastOffTime)) > 500);
+	return (((millis() - (*shooter).lastOffTime)) > 100);
 }
 
 void runShooter(SingleFlyWheelShooter *shooter)

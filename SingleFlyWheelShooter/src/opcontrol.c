@@ -66,7 +66,7 @@ void operatorControl() {
 		}
 		else
 		{
-			lcdSetText(uart1, 2, "NO  :(");
+			lcdSetText(uart1, 1, "NO  :(");
 		}
 
 		delay(20);
