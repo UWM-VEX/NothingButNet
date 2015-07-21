@@ -27,32 +27,32 @@ SingleFlyWheelShooter initSingleFlyWheelShooter(double kP, double kI, double kD,
 
 void shooterSetSetPoint(SingleFlyWheelShooter *shooter, int setPoint)
 {
-	setSetPoint((*(*shooter).controller), (double) setPoint);
+	setSetPoint((*shooter).controller, (double) setPoint);
 }
 
 void shooterSetKP(SingleFlyWheelShooter *shooter, double kP)
 {
-	setkP((*(*shooter).controller), kP);
+	setkP((*shooter).controller, kP);
 }
 
 void shooterSetKI(SingleFlyWheelShooter *shooter, double kI)
 {
-	setkI((*(*shooter).controller), kI);
+	setkI((*shooter).controller, kI);
 }
 
 void shooterSetKD(SingleFlyWheelShooter *shooter, double kD)
 {
-	setkD((*(*shooter).controller), kD);
+	setkD((*shooter).controller, kD);
 }
 
 void shooterSetKF(SingleFlyWheelShooter *shooter, double kF)
 {
-	setkF((*(*shooter).controller), kF);
+	setkF((*shooter).controller, kF);
 }
 
 void shooterSetErrorEpsilon(SingleFlyWheelShooter *shooter, int errorEpsilon)
 {
-	setErrorEpsilon((*(*shooter).controller), errorEpsilon);
+	setErrorEpsilon((*shooter).controller, errorEpsilon);
 }
 
 void updateShooter(SingleFlyWheelShooter *shooter)
@@ -76,7 +76,7 @@ int isShooterUpToSpeed(SingleFlyWheelShooter *shooter)
 
 void runShooter(SingleFlyWheelShooter *shooter)
 {
-	int speed = runPIDController((*(*shooter).controller),
+	int speed = runPIDController((*shooter).controller,
 			(*shooter).processVariable);
 	setPantherMotor((*shooter).motor, speed);
 }

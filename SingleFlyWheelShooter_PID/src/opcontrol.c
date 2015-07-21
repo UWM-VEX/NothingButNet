@@ -56,7 +56,7 @@ void operatorControl() {
 
 	while (1)
 	{
-		setSetPoint(&shooter, 4000);
+		shooterSetSetPoint(&shooter, 4000);
 		updateShooter(&shooter);
 		runShooter(&shooter);
 
