@@ -61,11 +61,11 @@ void operatorControl() {
 	{
 		if(lcdReadButtons(uart1) != lastLCDState)
 		{
-			if(lcdReadButtons == 1) speed -= 100;
-			else if(lcdReadButtons == 4) speed += 100;
+			if(lcdReadButtons(uart1) == 1) speed -= 100;
+			else if(lcdReadButtons(uart1) == 4) speed += 100;
 		}
 
-		lastLCDState = lcdReadButton(uart1);
+		lastLCDState = lcdReadButtons(uart1);
 
 		setSetPoint(&shooter, speed);
 		updateShooter(&shooter);
