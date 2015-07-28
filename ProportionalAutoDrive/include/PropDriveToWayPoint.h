@@ -21,6 +21,7 @@ struct PropDriveToWayPoint{
 	int minSpeed;
 	int initialDistance;
 	int initialAngle;
+	int isFinished;
 
 }typedef PropDriveToWayPoint;
 

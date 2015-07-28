@@ -9,7 +9,7 @@
 
 PropDriveToWayPoint initPropDriveToWayPoint(Drive drive, double distance, int rotation)
 {
-	PropDriveToWayPoint newStep = {drive, 12.7, .750, distance, rotation, 127, 10, 0, 0};
+	PropDriveToWayPoint newStep = {drive, 12.7, .750, distance, rotation, 127, 10, 0, 0, 0};
 	return newStep;
 }
 
@@ -90,5 +90,7 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 		rotation = limit(rotation, (*step).maxSpeed, -(*step).minSpeed);
 	}
 
-	autonomousInfo.isFinished = goodDistance && goodRotation;
+	arcadeDrive((*step).drive, magnitude, rotation);
+
+	(*step).isFinished = goodDistance && goodRotation;
 }

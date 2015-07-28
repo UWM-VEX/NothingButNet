@@ -48,5 +48,113 @@
  * The autonomous task may exit, unlike operatorControl() which should never exit. If it does
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
-void autonomous() {
+
+/**
+ * This is where you declare all of the actions the robot will take.
+ * The options are DriveForTime which is useful for driving into something
+ * but shouldn't be used elsewhere, DriveToWayPoint, which will handle
+ * driving forward and back, strafing, and turning (turning must be in
+ * its own step) and AutoLiftToHeight which will bring the lift to a
+ * specified height (Note: Once the step where this function is used has
+ * completed, the lift will move down due to gravity. To avoid this,
+ * create a new AutoLiftToHeight function to keep the lift at the desired
+ * height. Also, the lift to height code isn't perfectly tuned yet,
+ * if the autonomous stalls with the autoLiftToHeight function, help the
+ * lift up.)
+ *
+ * Running the pickup or spinner does not require an object to be declared
+ * or instantiated, an example is shown below.
+ */
+PropDriveToWayPoint drive24Inches;
+
+int isAuto = 1;
+
+long int stepStartTime;
+
+/**
+ * Runs at the start of autonomous. Steps should be initialized here.
+ */
+void autonomousInit()
+{
+	/**
+	 * Here, the different steps are instantiated and details are
+	 * given about them. By hovering over the function name, you can see a
+	 * list of the arguments to pass in.
+	 */
+	drive24Inches = initPropDriveToWayPoint(drive, 24.0, 0);
+
+	autonomousInfo.step = 1;
+	autonomousInfo.isFinished = 1;//0; TODO change back to 0 when real auto code is added
+
+	stepStartTime = millis();
+}
+
+/**
+ * Runs continuously during autonomous, should exit relatively promptly.
+ */
+void autonomousPeriodic()
+{
+	if(autonomousInfo.step != autonomousInfo.lastStep)
+	{
+		stepStartTime = millis();
+	}
+
+	autonomousInfo.elapsedTime = millis() - stepStartTime;
+
+	printf("Step: %d", autonomousInfo.step);
+
+	switch(autonomousSelection)
+	{
+	case(MODE_1):
+				switch(autonomousInfo.step)
+				{
+				case(1):
+
+				propDriveToWayPoint(&drive24Inches);
+
+				autonomousInfo.isFinished = drive24Inches.isFinished;
+
+				break;
+
+				default:
+					isAuto = 0;
+					break;
+
+				}
+	break;
+
+				case(DO_NOTHING):
+					isAuto = 0;
+				break;
+
+	}
+
+
+	autonomousInfo.lastStep = autonomousInfo.step;
+
+	if(autonomousInfo.isFinished)
+	{
+		autonomousInfo.step ++;
+		autonomousInfo.isFinished = 0;
+	}
+
+}
+
+void autonomous()
+{
+	autonomousInit();
+
+	while(isAuto)
+	{
+		autonomousPeriodic();
+
+		if(isOnline())
+		{
+			if(!isAutonomous() || !isEnabled()) isAuto = 0;
+		}
+
+		delay(20);
+
+		puts("Autonomous");
+	}
 }
