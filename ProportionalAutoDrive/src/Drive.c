@@ -32,4 +32,20 @@ void arcadeDrive(Drive drive, int magnitude, int rotation)
 {
 	int leftSpeed = magnitude + rotation;
 	int rightSpeed = magnitude - rotation;
+
+	leftSpeed = limit(leftSpeed, 127, -127);
+	rightSpeed = limit(rightSpeed, 127, -127);
+
+	setPantherMotor(drive.leftMotor, leftSpeed);
+	setPantherMotor(drive.rightMotor, rightSpeed);
 }
+
+void tankDrive(Drive drive, int leftSpeed, int rightSpeed)
+{
+	leftSpeed = limit(leftSpeed, 127, -127);
+	rightSpeed = limit(rightSpeed, 127, -127);
+
+	setPantherMotor(drive.leftMotor, leftSpeed);
+	setPantherMotor(drive.rightMotor, rightSpeed);
+}
+

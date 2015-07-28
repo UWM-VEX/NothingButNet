@@ -44,9 +44,12 @@
 #define MAIN_H_
 
 #include <API.h>
+#include "Utilities.h"
+#include "Auto.h"
 #include "PantherMotor.h"
 #include "PIDController.h"
 #include "Drive.h"
+#include "PropDriveToWayPoint.h"
 
 Drive drive;
 

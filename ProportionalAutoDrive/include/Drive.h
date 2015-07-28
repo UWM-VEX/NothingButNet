@@ -18,4 +18,12 @@ struct Drive{
 
 }typedef Drive;
 
+Drive initDrive(int leftMotor, int leftMotorInverted,
+		int rightMotor, int rightMotorInverted, int leftEncoderTopPort,
+		int leftEncoderBottomPort, int leftEncoderInverted,
+		int rightEncoderTopPort, int rightEncoderBottomPort,
+		int rightEncoderInverted, int gyroPort);
+void arcadeDrive(Drive drive, int magnitude, int rotation);
+void tankDrive(Drive drive, int leftSpeed, int rightSpeed);
+
 #endif /* DRIVE_H_ */
