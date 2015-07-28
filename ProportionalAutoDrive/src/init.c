@@ -59,4 +59,5 @@ void initializeIO() {
  * can be implemented in this task if desired.
  */
 void initialize() {
+	drive = initDrive(1, 0, 2, 1, 1, 2, 0, 3, 4, 1, 1);
 }

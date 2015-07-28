@@ -54,6 +54,7 @@
 void operatorControl() {
 
 	while (1) {
+		arcadeDrive(drive, OIGetDriveMagnitude(), OIGetDriveRotation());
 		delay(20);
 	}
 }

@@ -50,6 +50,7 @@
 #include "PIDController.h"
 #include "Drive.h"
 #include "PropDriveToWayPoint.h"
+#include "OI.h"
 
 Drive drive;
 
