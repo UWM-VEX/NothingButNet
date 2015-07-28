@@ -25,4 +25,12 @@ struct PropDriveToWayPoint{
 
 }typedef PropDriveToWayPoint;
 
+PropDriveToWayPoint initPropDriveToWayPoint(Drive drive, double distance, int rotation);
+void propDriveToWayPointSetMagnitudeKP(PropDriveToWayPoint *step, double kP);
+void propDriveToWayPointSetRotationKP(PropDriveToWayPoint *step, double kP);
+void propDriveToWayPointSetMaxSpeed(PropDriveToWayPoint *step, int speed);
+void propDriveToWayPointSetMinSpeed(PropDriveToWayPoint *step, int speed);
+void propDriveToWayPoint(PropDriveToWayPoint *step);
+
+
 #endif /* PROPDRIVETOWAYPOINT_H_ */
