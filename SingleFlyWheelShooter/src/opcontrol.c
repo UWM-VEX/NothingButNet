@@ -54,9 +54,20 @@
 
 void operatorControl() {
 
+	int speed = 4000;
+	int lastLCDState = 0;
+
 	while (1)
 	{
-		setSetPoint(&shooter, 4000);
+		if(lcdReadButtons(uart1) != lastLCDState)
+		{
+			if(lcdReadButtons == 1) speed -= 100;
+			else if(lcdReadButtons == 4) speed += 100;
+		}
+
+		lastLCDState = lcdReadButton(uart1);
+
+		setSetPoint(&shooter, speed);
 		updateShooter(&shooter);
 		runShooter(&shooter);
 
