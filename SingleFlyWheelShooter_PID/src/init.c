@@ -63,5 +63,5 @@ void initializeIO()
 void initialize()
 {
 	imeInitializeAll();
-	shooter = initSingleFlyWheelShooter(0.05,0.000002,0.01,0.015, 40, 2, 0, 0, 0);
+	shooter = initSingleFlyWheelShooter(0.1,0.0000002,0.01,0.015, 100, 2, 0, 0, 0);
 }

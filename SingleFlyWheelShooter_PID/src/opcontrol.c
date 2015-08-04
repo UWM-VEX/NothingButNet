@@ -65,11 +65,21 @@ void operatorControl() {
 			else if(lcdReadButtons(uart1) == 4) speed += 100;
 		}
 
+		puts("1");
+
 		lastLCDState = lcdReadButtons(uart1);
 
+		puts("2");
+
 		shooterSetSetPoint(&shooter, speed);
+		puts("3");
 		updateShooter(&shooter);
+		puts("4");
 		runShooter(&shooter);
+		puts("5");
+
+		lcdPrint(uart1, 2, "SP: %d", speed);
+		puts("6");
 
 		if(isShooterUpToSpeed(&shooter))
 		{
@@ -79,6 +89,11 @@ void operatorControl() {
 		{
 			lcdSetText(uart1, 1, "NO  :(");
 		}
+
+		puts("7");
+
+		lcdSetBacklight(uart1, (millis() / 1000) % 2);
+		puts("8");
 
 		delay(20);
 	}
