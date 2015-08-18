@@ -19,7 +19,7 @@ struct PropDriveToWayPoint{
 	int rotation;
 	int maxSpeed;
 	int minSpeed;
-	int initialDistance;
+	double initialDistance;
 	int initialAngle;
 	int isFinished;
 

@@ -46,15 +46,17 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 	if(autonomousInfo.step != autonomousInfo.lastStep)
 	{
 		(*step).initialDistance = (encoderGet((*step).drive.leftEncoder) +
-				encoderGet((*step).drive.rightEncoder)) / 2;
+				encoderGet((*step).drive.rightEncoder)) / 2.0;
+		(*step).initialDistance = encoderToInches((*step).initialDistance, 4.0);
 		(*step).initialAngle = gyroGet((*step).drive.gyro);
 	}
 
-	int currentDistance = (encoderGet((*step).drive.leftEncoder) +
-			encoderGet((*step).drive.rightEncoder)) / 2;
+	double currentDistance = (encoderGet((*step).drive.leftEncoder) +
+			encoderGet((*step).drive.rightEncoder)) / 2.0;
+	currentDistance = encoderToInches(currentDistance, 4.0);
 	int currentAngle = gyroGet((*step).drive.gyro);
 
-	int deltaDistance = currentDistance - (*step).initialDistance;
+	double deltaDistance = currentDistance - (*step).initialDistance;
 	int deltaAngle = currentAngle - (*step).initialAngle;
 
 	double distanceError = (*step).distance - deltaDistance;
