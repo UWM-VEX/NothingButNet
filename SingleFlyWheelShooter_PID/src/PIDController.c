@@ -66,7 +66,9 @@ int getIContribution(PIDController *controller, int processVariable)
 		int newError = (int) timeDiff * error;
 		(*controller).sumOfError += newError;
 		printf("Sum of Error: %d\n", (*controller).sumOfError);
-		return (int) (*controller).sumOfError * (*controller).kI;
+		long numToReturn = (long) (*controller).sumOfError * (*controller).kI;
+		numToReturn = limit(numToReturn, 2000000000, -2000000000);
+		return (int) numToReturn;
 	}
 }
 

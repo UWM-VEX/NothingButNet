@@ -59,9 +59,9 @@ void updateShooter(SingleFlyWheelShooter *shooter)
 {
 	(*shooter).processVariable = getIMEVelocity((*shooter).ime);
 
-	printf("Speed: %f\n", (*shooter).processVariable);
+	printf("Speed: %d\n", (*shooter).processVariable);
 
-	printf("Error: %f\n", (*(*shooter).controller).setPoint - (*shooter).processVariable);
+	printf("Error: %d\n", (*(*shooter).controller).setPoint - (*shooter).processVariable);
 
 	if(abs((int) (*(*shooter).controller).setPoint - (*shooter).processVariable) > 250)
 	{
