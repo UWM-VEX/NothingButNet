@@ -9,7 +9,7 @@
 
 PropDriveToWayPoint initPropDriveToWayPoint(Drive drive, double distance, int rotation)
 {
-	PropDriveToWayPoint newStep = {drive, 12.7, .750, distance, rotation, 127, 10, 0, 0, 0};
+	PropDriveToWayPoint newStep = {drive, /*12.7*/ .5, .750, distance, rotation, 100, 12, 0, 0, 0};
 	return newStep;
 }
 
@@ -51,6 +51,8 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 		(*step).initialAngle = gyroGet((*step).drive.gyro);
 	}
 
+	printf("\nInitial Distance: %f", (*step).initialDistance);
+
 	double currentDistance = (encoderGet((*step).drive.leftEncoder) +
 			encoderGet((*step).drive.rightEncoder)) / 2.0;
 	currentDistance = encoderToInches(currentDistance, 4.0);
@@ -61,6 +63,13 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 
 	double distanceError = (*step).distance - deltaDistance;
 	int angleError = (*step).rotation - deltaAngle;
+
+	printf("\nDistance Error: %f\nAngle Error: %d\n", distanceError, angleError);
+
+	int left = encoderGet(drive.leftEncoder);
+	int right = encoderGet(drive.rightEncoder);
+
+	printf("Left: %d\nRight: %d\n\n", left, right);
 
 	if(absDouble(distanceError) < .5)
 	{
@@ -74,7 +83,8 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 		if(forward) magnitude += (*step).minSpeed;
 		else magnitude -= (*step).minSpeed;
 
-		magnitude = limit(magnitude, (*step).maxSpeed, -(*step).minSpeed);
+		if(forward) magnitude = limit(magnitude, (*step).maxSpeed, (*step).minSpeed);
+		else magnitude = limit(magnitude, -(*step).minSpeed, (*step).maxSpeed);
 	}
 
 	if(abs(angleError) < 4)

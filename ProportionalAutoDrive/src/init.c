@@ -61,5 +61,5 @@ void initializeIO() {
 void initialize() {
 	autonomousSelection = MODE_1;
 
-	drive = initDrive(1, 0, 2, 1, 1, 2, 0, 3, 4, 1, 1);
+	drive = initDrive(5, 0, 4, 1, 4, 3, 0, 2, 1, 1, 1);
 }

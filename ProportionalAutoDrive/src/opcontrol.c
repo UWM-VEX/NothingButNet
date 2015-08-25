@@ -53,8 +53,16 @@
  */
 void operatorControl() {
 
+	int left = 0;
+	int right = 0;
+
 	while (1) {
 		arcadeDrive(drive, OIGetDriveMagnitude(), OIGetDriveRotation());
 		delay(20);
+
+		left = encoderGet(drive.leftEncoder);
+		right = encoderGet(drive.rightEncoder);
+
+		printf("Left: %d\nRight: %d\n\n", left, right);
 	}
 }

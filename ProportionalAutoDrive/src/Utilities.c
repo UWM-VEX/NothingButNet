@@ -47,5 +47,5 @@ int inDeadBandDouble(double realNum, double desiredNum, double deadBand)
 
 double encoderToInches(int encoderLines, double wheelDiameter)
 {
-	return ((encoderLines / 90.0) * PI * wheelDiameter);
+	return ((encoderLines / 360.0) * PI * wheelDiameter);
 }
