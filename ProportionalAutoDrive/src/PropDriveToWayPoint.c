@@ -9,7 +9,7 @@
 
 PropDriveToWayPoint initPropDriveToWayPoint(Drive drive, double distance, int rotation)
 {
-	PropDriveToWayPoint newStep = {drive, /*12.7*/ .5, .750, distance, rotation, 100, 12, 0, 0, 0};
+	PropDriveToWayPoint newStep = {drive, /*12.7*/ 1.25, .750, distance, rotation, 100, 12, 0, 0, 0, 18.0};
 	return newStep;
 }
 
@@ -73,10 +73,10 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 
 	if(absDouble(distanceError) < .5)
 	{
-		magnitude = (forward) ? -1 : 1;
+		magnitude = (forward) ? -10 : 10;
 		goodDistance = 1;
 	}
-	else
+	else if(absDouble(distanceError) < (*step).slowDownDistance)
 	{
 		magnitude = (int) (distanceError * (*step).magnitudeKP);
 
@@ -84,7 +84,12 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 		else magnitude -= (*step).minSpeed;
 
 		if(forward) magnitude = limit(magnitude, (*step).maxSpeed, (*step).minSpeed);
-		else magnitude = limit(magnitude, -(*step).minSpeed, (*step).maxSpeed);
+		else magnitude = limit(magnitude, -(*step).minSpeed, -(*step).maxSpeed);
+	}
+	else
+	{
+		if(forward) magnitude = (*step).maxSpeed;
+		else magnitude = -(*step).maxSpeed;
 	}
 
 	if(abs(angleError) < 4)

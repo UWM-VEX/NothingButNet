@@ -22,6 +22,7 @@ struct PropDriveToWayPoint{
 	double initialDistance;
 	int initialAngle;
 	int isFinished;
+	double slowDownDistance;
 
 }typedef PropDriveToWayPoint;
 
