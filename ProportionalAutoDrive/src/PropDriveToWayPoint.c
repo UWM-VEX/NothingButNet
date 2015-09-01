@@ -9,7 +9,7 @@
 
 PropDriveToWayPoint initPropDriveToWayPoint(Drive drive, double distance, int rotation)
 {
-	PropDriveToWayPoint newStep = {drive, /*12.7*/ 1.25, .750, distance, rotation, 100, 12, 0, 0, 0, 18.0};
+	PropDriveToWayPoint newStep = {drive, /*12.7*/ 1.25, .50, distance, rotation, 100, 12, 0, 0, 0, 18.0};
 	return newStep;
 }
 
@@ -42,6 +42,7 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 
 	int forward = (*step).distance >= 0;
 	int turnRight = (*step).rotation >= 0;
+	int driveStraight = (*step).rotation == 0;
 
 	if(autonomousInfo.step != autonomousInfo.lastStep)
 	{
@@ -73,7 +74,7 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 
 	if(absDouble(distanceError) < .5)
 	{
-		magnitude = (forward) ? -10 : 10;
+		//magnitude = (forward) ? -10 : 10;
 		goodDistance = 1;
 	}
 	else if(absDouble(distanceError) < (*step).slowDownDistance)
@@ -92,19 +93,47 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 		else magnitude = -(*step).maxSpeed;
 	}
 
-	if(abs(angleError) < 4)
+	if(!driveStraight || driveStraight)//TODO change back
 	{
-		rotation = 0;
-		goodRotation = 1;
+		if(abs(angleError) < 1)
+		{
+			rotation = 0;
+			goodRotation = 1;
+		}
+		else
+		{
+			rotation = (int) (angleError * (*step).rotationKP);
+
+			if(turnRight) rotation += (*step).minSpeed;
+			else rotation -= (*step).minSpeed;
+
+			/*if(turnRight) */rotation = limit(rotation, (*step).maxSpeed, -(*step).maxSpeed);
+			//else rotation = limit(rotation, -(*step).minSpeed, -(*step).maxSpeed);
+		}
+
+		if(driveStraight) goodRotation = 0;
 	}
-	else
+	//else TODO reverse
 	{
-		rotation = (int) (angleError * (*step).rotationKP);
+		if(goodDistance && driveStraight)
+		{
+			int turnEncoderError = right - left;
 
-		if(turnRight) rotation += (*step).minSpeed;
-		else rotation -= (*step).minSpeed;
-
-		rotation = limit(rotation, (*step).maxSpeed, -(*step).minSpeed);
+			if(abs(turnEncoderError) < 1)
+			{
+				goodRotation = 1;
+			}
+			else if(turnEncoderError > 0)
+			{
+				rotation = 15;
+				goodRotation = 0;
+			}
+			else
+			{
+				rotation = -15;
+				goodRotation = 0;
+			}
+		}
 	}
 
 	arcadeDrive((*step).drive, magnitude, rotation);

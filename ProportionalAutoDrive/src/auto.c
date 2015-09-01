@@ -81,7 +81,7 @@ void autonomousInit()
 	 * given about them. By hovering over the function name, you can see a
 	 * list of the arguments to pass in.
 	 */
-	drive24Inches = initPropDriveToWayPoint(drive, -48.0, 0);
+	drive24Inches = initPropDriveToWayPoint(drive, 48, 0);
 	//propDriveToWayPointSetMaxSpeed(&drive24Inches, 50);
 
 	autonomousInfo.lastStep = 0;
