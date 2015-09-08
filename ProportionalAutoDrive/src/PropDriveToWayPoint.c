@@ -9,7 +9,7 @@
 
 PropDriveToWayPoint initPropDriveToWayPoint(Drive drive, double distance, int rotation)
 {
-	PropDriveToWayPoint newStep = {drive, /*12.7*/ 1.25, .50, distance, rotation, 100, 12, 0, 0, 0, 18.0};
+	PropDriveToWayPoint newStep = {drive, /*12.7*/ 1.50, .50, distance, rotation, 100, 12, 0, 0, 0, 18.0, 1000};
 	return newStep;
 }
 
@@ -87,6 +87,11 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 		if(forward) magnitude = limit(magnitude, (*step).maxSpeed, (*step).minSpeed);
 		else magnitude = limit(magnitude, -(*step).minSpeed, -(*step).maxSpeed);
 	}
+	else if(autonomousInfo.elapsedTime < (*step).timeToAccelerate)
+	{
+		magnitude = (int) ((autonomousInfo.elapsedTime * 1.0 / (*step).timeToAccelerate)
+				* (*step).maxSpeed);
+	}
 	else
 	{
 		if(forward) magnitude = (*step).maxSpeed;
@@ -119,18 +124,18 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 		{
 			int turnEncoderError = right - left;
 
-			if(abs(turnEncoderError) < 1)
+			if(abs(turnEncoderError) < 2 || 1)
 			{
 				goodRotation = 1;
 			}
 			else if(turnEncoderError > 0)
 			{
-				rotation = 15;
+				rotation = 20;
 				goodRotation = 0;
 			}
 			else
 			{
-				rotation = -15;
+				rotation = -20;
 				goodRotation = 0;
 			}
 		}
