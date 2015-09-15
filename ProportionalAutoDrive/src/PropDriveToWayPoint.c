@@ -9,7 +9,7 @@
 
 PropDriveToWayPoint initPropDriveToWayPoint(Drive drive, double distance, int rotation)
 {
-	PropDriveToWayPoint newStep = {drive, /*12.7*/ 1.50, .50, distance, rotation, 100, 12, 0, 0, 0, 18.0, 1000};
+	PropDriveToWayPoint newStep = {drive, /*12.7*/ 1.50, 1.00, distance, rotation, 100, 15, 0, 0, 0, 18.0, 500};
 	return newStep;
 }
 
@@ -41,7 +41,6 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 	int rotation = 0;
 
 	int forward = (*step).distance >= 0;
-	int turnRight = (*step).rotation >= 0;
 	int driveStraight = (*step).rotation == 0;
 
 	if(autonomousInfo.step != autonomousInfo.lastStep)
@@ -64,6 +63,8 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 
 	double distanceError = (*step).distance - deltaDistance;
 	int angleError = (*step).rotation - deltaAngle;
+
+	int turnRight = angleError >= 0;
 
 	printf("\nDistance Error: %f\nAngle Error: %d\n", distanceError, angleError);
 
@@ -91,6 +92,8 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 	{
 		magnitude = (int) ((autonomousInfo.elapsedTime * 1.0 / (*step).timeToAccelerate)
 				* (*step).maxSpeed);
+
+		if(!forward) magnitude *= -1;
 	}
 	else
 	{
@@ -100,7 +103,7 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 
 	if(!driveStraight || driveStraight)//TODO change back
 	{
-		if(abs(angleError) < 1)
+		if(abs(angleError) < 2)
 		{
 			rotation = 0;
 			goodRotation = 1;
@@ -112,8 +115,8 @@ void propDriveToWayPoint(PropDriveToWayPoint *step)
 			if(turnRight) rotation += (*step).minSpeed;
 			else rotation -= (*step).minSpeed;
 
-			/*if(turnRight) */rotation = limit(rotation, (*step).maxSpeed, -(*step).maxSpeed);
-			//else rotation = limit(rotation, -(*step).minSpeed, -(*step).maxSpeed);
+			if(turnRight) rotation = limit(rotation, (*step).maxSpeed, -(*step).maxSpeed);
+			else rotation = limit(rotation, -(*step).minSpeed, -(*step).maxSpeed);
 		}
 
 		if(driveStraight) goodRotation = 0;

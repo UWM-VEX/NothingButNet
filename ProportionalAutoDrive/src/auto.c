@@ -66,6 +66,8 @@
  * or instantiated, an example is shown below.
  */
 PropDriveToWayPoint drive24Inches;
+PropDriveToWayPoint turn90Left;
+PropDriveToWayPoint drive18Back;
 
 int isAuto = 1;
 
@@ -81,7 +83,9 @@ void autonomousInit()
 	 * given about them. By hovering over the function name, you can see a
 	 * list of the arguments to pass in.
 	 */
-	drive24Inches = initPropDriveToWayPoint(drive, 0, 90);
+	drive24Inches = initPropDriveToWayPoint(drive, 36, 0);
+	turn90Left = initPropDriveToWayPoint(drive, 0, -90);
+	drive18Back = initPropDriveToWayPoint(drive, -18, 0);
 	//propDriveToWayPointSetMaxSpeed(&drive24Inches, 50);
 
 	autonomousInfo.lastStep = 0;
@@ -117,6 +121,20 @@ void autonomousPeriodic()
 				autonomousInfo.isFinished = drive24Inches.isFinished;
 
 				break;
+
+				case(2):
+					propDriveToWayPoint(&turn90Left);
+
+					autonomousInfo.isFinished = turn90Left.isFinished;
+
+					break;
+
+				case(3):
+					propDriveToWayPoint(&drive18Back);
+
+					autonomousInfo.isFinished = drive18Back.isFinished;
+
+					break;
 
 				default:
 					isAuto = 0;
