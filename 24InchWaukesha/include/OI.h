@@ -14,5 +14,6 @@ int OIGetRunShooterFull();
 int OIGetRunShooterHalf();
 int OIGetReverseShooterFull();
 int OIGetReverseShooterHalf();
+int OIGetDeployRamp();
 
 #endif /* INCLUDE_OI_H_ */

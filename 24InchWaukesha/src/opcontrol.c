@@ -56,6 +56,11 @@ void operatorControl()
 			shooterAtSpeed(robotShooter, 0);
 		}
 
+		if(OIGetDeployRamp())
+		{
+			deployRamp(robotRamp);
+		}
+
 		delay(25);
 	}
 }

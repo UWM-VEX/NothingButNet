@@ -12,5 +12,6 @@
 
 Drive robotDrive;
 Shooter robotShooter;
+Ramp robotRamp;
 
 #endif /* INCLUDE_ROBOT_H_ */

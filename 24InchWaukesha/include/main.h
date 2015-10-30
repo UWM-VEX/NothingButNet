@@ -48,6 +48,7 @@
 #include "PantherMotor.h"
 #include "Drive.h"
 #include "Shooter.h"
+#include "Ramp.h"
 #include "Robot.h"
 #include "OI.h"
 

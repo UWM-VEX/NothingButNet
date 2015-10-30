@@ -36,3 +36,8 @@ int OIGetReverseShooterHalf()
 {
 	return joystickGetDigital(1, 7, JOY_UP);
 }
+
+int OIGetDeployRamp()
+{
+	return (joystickGetDigital(1, 5, JOY_DOWN) && joystickGetDigital(1, 6, JOY_DOWN));
+}

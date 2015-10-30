@@ -40,4 +40,5 @@ void initialize() {
 	robotDrive = initDrive(initPantherMotor(2,0), initPantherMotor(8,1),
 			initPantherMotor(3,0), initPantherMotor(9,1));
 	robotShooter = initShooter(initPantherMotor(4,0), initPantherMotor(5,0));
+	robotRamp = initRamp(1);
 }
