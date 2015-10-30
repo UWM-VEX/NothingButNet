@@ -34,21 +34,31 @@ void operatorControl()
 	int lastIncrement = 0;
 	int lastDecrement = 0;
 
+	int lastIntake1InButton = 0;
+	int intake1RunningIn = 0;
+
 	while (true)
 	{
 		tankDrive(robotDrive, OIGetDriveLeft(), OIGetDriveRight());
 
-		if(OIGetIntake1In())
+		if(OIGetIntake1In() && !lastIntake1InButton)
 		{
-			intake1In(robotIntake);
+			intake1RunningIn = !intake1RunningIn;
+
+			if(intake1RunningIn)
+			{
+				intake1In(robotIntake);
+			}
+			else
+			{
+				intake1Stop(robotIntake);
+			}
+
+			lastIntake1InButton = 1;
 		}
 		else if(OIGetIntake1Out())
 		{
 			intake1Out(robotIntake);
-		}
-		else
-		{
-			intake1Stop(robotIntake);
 		}
 
 		if(OIGetIntake2In())
