@@ -63,5 +63,7 @@ void initializeIO()
 void initialize()
 {
 	imeInitializeAll();
-	shooter = initSingleFlyWheelShooter(0.1,0.0000002,0.01,0.015, 100, 2, 0, 1, 2, 0);
+	theShooter = initPantherMotor(5, 0);
+	shooterEncoder = initRedEncoder(3, 4, 0);
+	//shooter = initSingleFlyWheelShooter(0.1,0.0000002,0.01,0.015, 100, 2, 0, 1, 2, 0);
 }

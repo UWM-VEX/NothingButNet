@@ -14,7 +14,7 @@ struct RedEncoder{
 	int lastReading;
 	long lastTime;
 	long sampleTime; //milliseconds
-	int lastVelocity;
+	double lastVelocity;
 
 }typedef RedEncoder;
 

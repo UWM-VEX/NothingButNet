@@ -30,6 +30,6 @@ void shooterSetKF(SingleFlyWheelShooter*, double);
 void shooterSetErrorEpsilon(SingleFlyWheelShooter*, int);
 void runShooter(SingleFlyWheelShooter *shooter);
 
-SingleFlyWheelShooter shooter;
+//SingleFlyWheelShooter shooter;
 
 #endif /* SINGLEFLYWHEELSHOOTER_H_ */

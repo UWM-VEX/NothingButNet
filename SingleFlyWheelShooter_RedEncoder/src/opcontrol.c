@@ -54,15 +54,15 @@
 
 void operatorControl() {
 
-	int speed = 4000;
+	/*double speed = .6;
 	int lastLCDState = 0;
 
 	while (1)
 	{
 		if(lcdReadButtons(uart1) != lastLCDState)
 		{
-			if(lcdReadButtons(uart1) == 1) speed -= 100;
-			else if(lcdReadButtons(uart1) == 4) speed += 100;
+			if(lcdReadButtons(uart1) == 1) speed -= .05;
+			else if(lcdReadButtons(uart1) == 4) speed += .05;
 		}
 
 		puts("1");
@@ -96,5 +96,12 @@ void operatorControl() {
 		puts("8");
 
 		delay(20);
+	}*/
+
+	while(1)
+	{
+		setPantherMotor(theShooter, 127);
+		printf("Speed: %f\n", getRedEncoderVelocity(&shooterEncoder));
+		printf("Encoder: %d\n", encoderGet(shooterEncoder.encoder));
 	}
 }

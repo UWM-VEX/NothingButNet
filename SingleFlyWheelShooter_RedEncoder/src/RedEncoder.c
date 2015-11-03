@@ -11,30 +11,33 @@ RedEncoder initRedEncoder(int top, int bottom, int inverted)
 {
 	Encoder encoder = encoderInit(top, bottom, inverted);
 
-	RedEncoder newEncoder = {encoder, 0, millis(), 250, 0};
+	RedEncoder newEncoder = {encoder, 0, millis(), 250, 0.0};
 
 	return newEncoder;
 }
 
 double getRedEncoderVelocity(RedEncoder *encoder)
 {
-	if(millis() - (*encoder).lastTime > (*encoder).sampleTime)
+	if((millis() - (*encoder).lastTime) > (*encoder).sampleTime)
 	{
-		int dPosition = encoderGet((*encoder).encoder) -
-				(*encoder).lastReading;
+		double dPosition = (double) (encoderGet((*encoder).encoder) -
+				(*encoder).lastReading);
 
 		int dTime = (int) (millis() - (*encoder).lastTime);
 
-		double velocity = (dPosition + 1.0) / dTime;
+		double velocity = dPosition / dTime;
 
 		(*encoder).lastReading = encoderGet((*encoder).encoder);
 		(*encoder).lastTime = millis();
 		(*encoder).lastVelocity = velocity;
 
+		puts("Update");
+
 		return velocity;
 	}
 	else
 	{
+		puts("No");
 		return (*encoder).lastVelocity;
 	}
 }
