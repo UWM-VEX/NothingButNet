@@ -25,7 +25,6 @@
   * The purpose of this function is solely to set the default pin modes (pinMode()) and port states (digitalWrite()) of limit switches, push buttons, and solenoids. It can also safely configure a UART port (usartOpen()) but cannot set up an LCD (lcdInit()).
   */
 void initializeIO() {
-	imeInitializeAll();
 	lcdInit(uart1);
 }
 
@@ -39,11 +38,13 @@ void initializeIO() {
  * This function must exit relatively promptly, or the operatorControl() and autonomous() tasks will not start. An autonomous mode selection menu like the pre_auton() in other environments can be implemented in this task if desired.
  */
 void initialize() {
+	imeInitializeAll();
+
 	robotDrive = initDrive(initPantherMotor(8,0), initPantherMotor(1,1),
 			initPantherMotor(9,0), initPantherMotor(2,1),
 			initPantherMotor(10,0), initPantherMotor(3,1),
 			encoderInit(1, 2, 0), encoderInit(3,4,0));
 	robotIntake = initIntake(initPantherMotor(5,0), initPantherMotor(6,0));
-	PIDController shooterPID = initPIDController(0, 0, 0, .05, 0, 100);
+	PIDController shooterPID = initPIDController(.0125, 0, 0, .028, 0, 100);
 	robotShooter = initShooter(shooterPID, initPantherMotor(4,0), initPantherMotor(7,0), 3000, 0, 0);
 }

@@ -20,6 +20,7 @@ struct Shooter{
 	int processVariable;
 	long lastOffTime;
 	IME ime;
+	int speed;
 
 }typedef Shooter;
 

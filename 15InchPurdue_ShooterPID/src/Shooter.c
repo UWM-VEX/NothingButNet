@@ -15,13 +15,14 @@ Shooter initShooter(PIDController controller, PantherMotor motor1, PantherMotor 
 
 	IME newIME = initIME(IMEPort, IMEInverted);
 
-	Shooter newShooter = {motor1, motor2, 0, defaultSpeed, 0, millis(), newController, 0, millis(), newIME};
+	Shooter newShooter = {motor1, motor2, 0, defaultSpeed, 0, millis(), newController, 0, millis(), newIME, defaultSpeed};
 	return newShooter;
 }
 
 void turnShooterOn(Shooter *shooter)
 {
 	(*shooter).turnedOn = 1;
+	(*shooter).SP = (*shooter).speed;
 	puts("Shooter turned on.");
 }
 
@@ -33,12 +34,12 @@ void turnShooterOff(Shooter *shooter)
 
 void changeShooterSP(Shooter *shooter, int SP)
 {
-	(*shooter).SP = SP;
+	(*shooter).speed = SP;
 }
 
 void incrementShooterSP(Shooter *shooter, int amount)
 {
-	(*shooter).SP += amount;
+	(*shooter).speed += amount;
 }
 
 void runShooter(Shooter *shooter)
@@ -47,6 +48,7 @@ void runShooter(Shooter *shooter)
 
 	if((*shooter).turnedOn)
 	{
+		(*shooter).SP = (*shooter).speed;
 		speed = (*shooter).SP;
 
 		(*shooter).lastSpeed = (*shooter).SP;
@@ -57,7 +59,8 @@ void runShooter(Shooter *shooter)
 
 		if(dT > 50)
 		{
-			speed = --(*shooter).lastSpeed;
+			speed = (*shooter).lastSpeed - 10;
+			(*shooter).lastSpeed = speed;
 			(*shooter).lastChangeTime = millis();
 		}
 		else
@@ -68,7 +71,7 @@ void runShooter(Shooter *shooter)
 		speed = limit(speed, 3500, 0);
 	}
 
-	(*shooter).controller.setPoint = speed;
+	(*shooter).SP = speed;
 
 	runShooterAtSpeed(shooter);
 }
@@ -119,6 +122,7 @@ int isShooterUpToSpeed(Shooter *shooter)
 
 void runShooterAtSpeed(Shooter *shooter)
 {
+	(*shooter).controller.setPoint = (*shooter).SP;
 	int speed = runPIDController(&((*shooter).controller),
 			(*shooter).processVariable);
 	setPantherMotor((*shooter).motor1, speed);
