@@ -54,6 +54,8 @@
 #include "Shooter.h"
 #include "Robot.h"
 
+int numJoysticks;
+
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus
 extern "C" {

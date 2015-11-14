@@ -17,6 +17,21 @@
 
 #include "main.h"
 
+void teleopInit()
+{
+	if(isJoystickConnected(2))
+	{
+		numJoysticks = 2;
+		lcdPrint(uart1, 1, ":DDD");
+		delay(5000);
+	}
+	else
+	{
+		numJoysticks = 1;
+		lcdPrint(uart1, 1, ":(((((");
+		delay(5000);
+	}
+}
 
 /**
  * Runs the user operator control code.
@@ -39,6 +54,8 @@ void operatorControl()
 
 	int lastIntake1OutButton = 0;
 	int intake1RunningOut = 0;
+
+	teleopInit();
 
 	while (true)
 	{

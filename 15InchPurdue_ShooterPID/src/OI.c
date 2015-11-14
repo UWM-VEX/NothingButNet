@@ -19,22 +19,51 @@ int OIGetDriveRight()
 
 int OIGetIntake1In()
 {
-	return joystickGetDigital(1, 8, JOY_DOWN);
+	if(numJoysticks == 2)
+	{
+		return joystickGetDigital(1, 6, JOY_DOWN);
+	}
+	else
+	{
+		return joystickGetDigital(1, 8, JOY_DOWN);
+	}
+
 }
 
 int OIGetIntake1Out()
 {
-	return joystickGetDigital(1, 8, JOY_UP);
+	if(numJoysticks == 2)
+	{
+		return joystickGetDigital(1, 6, JOY_UP);
+	}
+	else
+	{
+		return joystickGetDigital(1, 8, JOY_UP);
+	}
 }
 
 int OIGetIntake2In()
 {
-	return joystickGetDigital(1, 7, JOY_DOWN);
+	if(numJoysticks == 2)
+	{
+		return joystickGetDigital(1, 6, JOY_DOWN);
+	}
+	else
+	{
+		return joystickGetDigital(1, 7, JOY_DOWN);
+	}
 }
 
 int OIGetIntake2Out()
 {
-	return joystickGetDigital(1, 7, JOY_UP);
+	if(numJoysticks == 2)
+	{
+		return joystickGetDigital(1, 6, JOY_UP);
+	}
+	else
+	{
+		return joystickGetDigital(1, 7, JOY_UP);
+	}
 }
 
 int OIShooterOn()
