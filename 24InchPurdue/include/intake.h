@@ -14,7 +14,8 @@ struct intake{
 }typedef intake;
 
 intake initIntake(PantherMotor front, PantherMotor back);
-void IntakeIn(intake in);
-void IntakeOut(intake out);
+void intakeIn(intake in);
+void intakeOut(intake out);
+void intakeStop(intake in);
 
 #endif /* INCLUDE_INTAKE_H_ */

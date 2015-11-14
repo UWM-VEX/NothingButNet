@@ -12,12 +12,18 @@ intake initIntake(PantherMotor front, PantherMotor back){
 	return newIntake;
 }
 
-void IntakeIn(intake in){
+void intakeIn(intake in){
 	setPantherMotor(in.front, 127);
 	setPantherMotor(in.back, 127);
 }
 
-void IntakeOut(intake out){
+void intakeOut(intake out){
 	setPantherMotor(out.front, -127);
 	setPantherMotor(out.back, -127);
+}
+
+void intakeStop(intake in)
+{
+	setPantherMotor(in.front, 0);
+	setPantherMotor(in.back, 0);
 }

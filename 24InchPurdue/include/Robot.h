@@ -14,5 +14,6 @@ Drive robotDrive;
 Shooter robotShooter;
 Ramp robotRamp;
 intake robotIntake;
+elevator robotElevator;
 
 #endif /* INCLUDE_ROBOT_H_ */

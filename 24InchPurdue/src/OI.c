@@ -39,12 +39,12 @@ int OIGetReverseShooterHalf()
 
 int OIGetIntakeIn()
 {
-	return joystickGetDigtal(1, 7, JOY_DOWN);
+	return joystickGetDigital(1, 7, JOY_DOWN);
 }
 
 int OIGetIntakeOut()
 {
-	return joystickGetDigtal(1, 7, JOY_LEFT);
+	return joystickGetDigital(1, 7, JOY_LEFT);
 }
 
 int OIGetElevatorUp()

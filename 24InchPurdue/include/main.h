@@ -47,6 +47,7 @@
 #include "Utilities.h"
 #include "PantherMotor.h"
 #include "elevator.h"
+#include "intake.h"
 #include "Drive.h"
 #include "Shooter.h"
 #include "Ramp.h"

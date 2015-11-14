@@ -17,6 +17,17 @@
 
 #include "main.h"
 
+void teleopInit()
+{
+	if(isJoystickConnected(2))
+	{
+		numJoysticks = 2;
+	}
+	else
+	{
+		numJoysticks = 1;
+	}
+}
 
 /**
  * Runs the user operator control code.
@@ -31,8 +42,16 @@
  */
 void operatorControl() 
 {
+	int firstFrame = 1;
+
 	while (true)
 	{
+		if(firstFrame)
+		{
+			teleopInit();
+			firstFrame = 0;
+		}
+
 		tankDrive(robotDrive, OIGetDriveLeft(), OIGetDriveRight());
 
 		if(OIGetRunShooterFull())
@@ -63,20 +82,28 @@ void operatorControl()
 
 		if(OIGetIntakeIn())
 		{
-			intakeIn(intake);
+			intakeIn(robotIntake);
 		}
-		if(OIGetIntakeIn())
+		else if(OIGetIntakeOut())
 		{
-			intakeOut(intake);
+			intakeOut(robotIntake);
+		}
+		else
+		{
+			intakeStop(robotIntake);
 		}
 
 		if(OIGetElevatorUp())
 		{
-			elevatorUp(elevator);
+			elevatorUp(robotElevator);
 		}
-		if(OIGetElevatorDown())
+		else if(OIGetElevatorDown())
 		{
-			elevatorDown(elevator);
+			elevatorDown(robotElevator);
+		}
+		else
+		{
+			elevatorStop(robotElevator);
 		}
 
 		delay(25);

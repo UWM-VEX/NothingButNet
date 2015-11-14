@@ -41,5 +41,7 @@ void initialize() {
 			initPantherMotor(3,0), initPantherMotor(9,1));
 	robotShooter = initShooter(initPantherMotor(4,0), initPantherMotor(5,0));
 	robotRamp = initRamp(1);
-	intake = initIntake(initPantherMotor(2,0)), PantherMotor(0,0));
+	robotIntake = initIntake(initPantherMotor(6,0), initPantherMotor(7,0));
+	robotElevator = initElevator(initPantherMotor(1,0));
+
 }

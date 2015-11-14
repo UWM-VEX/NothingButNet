@@ -8,6 +8,8 @@
 #ifndef INCLUDE_OI_H_
 #define INCLUDE_OI_H_
 
+int numJoysticks;
+
 int OIGetDriveLeft();
 int OIGetDriveRight();
 int OIGetRunShooterFull();

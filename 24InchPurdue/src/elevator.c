@@ -11,10 +11,14 @@ elevator initElevator(PantherMotor motor){
 	return newElevator;
 }
 
-void ElevatorUp(elevator in){
+void elevatorUp(elevator in){
 	setPantherMotor(in.motor, 127);
 }
 
-void ElevatorDown(elevator out){
+void elevatorDown(elevator out){
 	setPantherMotor(out.motor, -127);
+}
+
+void elevatorStop(elevator out){
+	setPantherMotor(out.motor, 0);
 }

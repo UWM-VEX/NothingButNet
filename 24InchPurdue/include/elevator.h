@@ -15,7 +15,8 @@ struct elevator{
 }typedef elevator;
 
 elevator initElevator(PantherMotor motor);
-void ElevatorUp(elevator in);
-void ElevatorDown(elevator out);
+void elevatorUp(elevator in);
+void elevatorDown(elevator out);
+void elevatorStop(elevator out);
 
 #endif /* INCLUDE_ELEVATOR_H_ */
