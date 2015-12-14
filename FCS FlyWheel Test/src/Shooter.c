@@ -17,12 +17,14 @@ Shooter initShooter(PantherMotor motor1, PantherMotor motor2,
 void turnShooterOn(Shooter *shooter)
 {
 	(*shooter).turnedOn = 1;
+	(*shooter).lastSpeed = 50;
 	puts("Shooter turned on.");
 }
 
 void turnShooterOff(Shooter *shooter)
 {
 	(*shooter).turnedOn = 0;
+	(*shooter).lastSpeed = (*shooter).SP;
 	(*shooter).lastChangeTime = millis();
 }
 
@@ -42,9 +44,23 @@ void runShooter(Shooter *shooter)
 
 	if((*shooter).turnedOn)
 	{
-		speed = (*shooter).SP;
+		//speed = (*shooter).SP;
 
-		(*shooter).lastSpeed = (*shooter).SP;
+		//(*shooter).lastSpeed = 0;//(*shooter).SP;
+
+		int dT = (int) (millis() - (*shooter).lastChangeTime);
+
+		if(dT > 25)
+		{
+			speed = ++(*shooter).lastSpeed;
+			(*shooter).lastChangeTime = millis();
+		}
+		else
+		{
+			speed = (*shooter).lastSpeed;
+		}
+
+		speed = limit(speed, (*shooter).SP, 0);
 	}
 	else
 	{
