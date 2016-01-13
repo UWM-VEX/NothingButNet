@@ -27,9 +27,7 @@ BallStopper initBallStopper(int extend)
 {
 	pinMode(extend, OUTPUT);
 
-	BallStopper newBallStopper = {extend, millis(), 0};
-
-	setBallStopperDown(&newBallStopper);
+	BallStopper newBallStopper = {extend, STOPPER_DOWN};
 
 	return newBallStopper;
 }

@@ -56,6 +56,8 @@ void operatorControl()
 	int lastIntake1OutButton = 0;
 	int intake1RunningOut = 0;
 
+	int stopperState = LOW;
+
 	teleopInit();
 
 	while (true)
@@ -156,6 +158,8 @@ void operatorControl()
 		{
 			ballStopperUp(&robotStopper);
 		}
+
+		runBallStopper(&robotStopper);
 
 		delay(25);
 
